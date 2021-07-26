@@ -1,69 +1,89 @@
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 
-void setup_state(char state[]);
-void setup_district(char district[]);
+char* take_state_from_user();
+int is_valid_state(char* state);
 
-int main ()
-{
-    char state[20];
-    char district[20];
+char* take_district_from_user();
+int is_valid_district(char* district);
+
+int main() {
+    char *state;
+    char *district;
+
+    printf("\n\t\t\tWelcome to Salat Watch Bangladesh\n\n");
+
+    do {
+        state = take_state_from_user();
+    } while (is_valid_state(state) == 0);
+
+    do {
+        district = take_district_from_user();
+    } while (is_valid_district(district) == 0);
     
-    printf("\n          Welcome to Salat Watch Bangladesh              \n\n");
-    printf("                    Plz Set Up                      \n\n");
-
-    printf("State (Use capital letter) : ");
-    scanf("%s", state);
-    setup_state(state);
-    printf("\n\nDistrict (Use capital letter) : ");
-    scanf("%s", district);
-    setup_district(district);
-
-    printf("\n\nYour Location is : (%s, %s)", state, district);
+    printf("\nYour Location is (%s, %s)", state, district);
     return 0;
 }
 
-void setup_state(char state [])
-{
+char* take_state_from_user() {
+    char* state;
+    state = (char*)malloc(sizeof(20));
+
+    printf("\nState: ");
+    scanf("%s", state);
+    strupr(state);
+    return state;
+}
+
+int is_valid_state(char* state) {
+    char valid_states[8][20] = {
+                                "DHAKA", "CHATTAGRAM", " BARISAL", "KHULNA", "RAJSHAHI", "RANGPUR", "SYLHET",
+                                "MYMENSINGH"
+                               };
     int i;
+
+    for (i = 0; i < 8; i += 1) {
+        if (strcmp(state, valid_states[i]) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+char* take_district_from_user() {
     
-    char location_state[16][20] = { "DHAKA", "Dhaka", "CHATTAGRAM", "Chattagram", " BARISAL", "Barisal",
-                               "KHULNA", "Khulna", "RAJSHAHI", "Rajshahi", "RANGPUR", "Rangpur",
-                               "SYLHET", "Sylhet", "MYMENSINGH", "Mymensingh"}; 
+    
+    char* district;
+    district = (char*)malloc(sizeof(20));
 
-if(1)
-{
-    for ( i = 0; i < 16; i += 1 )   
-    {
-        if(strcmp(state, location_state[i]) == 0)
-        break;
-    }
-        printf("\n\nPlz Enter a valid State (Use capital letter) : ");
-        scanf("%s", state);
+    printf("\nDistrict: ");
+    scanf("%s", district);
+    strupr(district);
+    return district;
 }
-}    
 
-void setup_district(char district[])
-{
+int is_valid_district(char* district) {
+    char valid_districts[64][20] = {
+                                      "BARGUNA", "BARISAL", "BHOLA", "JHALOKATI", "PATUAKHALI", "PIROJPUR", "BANDARBAN","BRAHAMANBARIA", 
+                                      "CHANDPUR", "CHITTAGONG", "COMILLA", "COX'S BAZAR", "FENI", "KHAGRACHHARI", "LAKSHMIPUR", "NOAKHALI", 
+                                      "RANGAMATI", "DHAKA", "FARIDPUR", "GAZIPUR", "GOPALGANJ", "JAMALPUR","KISHOREGANJ", "MADARIPUR", 
+                                      "MANIKGANJ", "MUNSHIGANJ", "MAYMENSINGH", "NARAYANGANJ", "NARSINGDI", "NETRAKONA", "RAJBARI", 
+                                      "SHARIATPUR", "SHERPUR", "TANGAIL", "BAGERHAT", "CHUDANGA", "JESSORE", "JHENAIDAH", "KHULNA", 
+                                      "KUSHTIA", "MAGURA", "MEHERPUR", "NARAIL", "SATKHIRA", "BOGRA", "JOYPURHAT", "NAOGAON", 
+                                      "NATORE", "NAWABGANJ", "PABNA", "RAJSHAHI", "SIRAJGANJ", "DINAJPUR", "GAIBANDHA","KURIGRAM", 
+                                      "LALMONIRHAT", "NILPHAMARI", "PANCHAGARH", "RANGPUR", "THAKURGAON", "HABIGANJ", "MAULAVIBAZAR",
+                                      "SUNAMGANJ", "SYLHET"
+                                    };
     int i;
-    char location_district[64][20] = {"BARGUNA", "BARISAL", "BHOLA", "JHALOKATI", "PATUAKHALI", "PIROJPUR", "BANDARBAN", 
-                              "BRAHAMANBARIA", "CHANDPUR", "CHITTAGONG", "COMILLA", "COX'S BAZAR", "FENI", "KHAGRACHHARI", 
-                              "LAKSHMIPUR", "NOAKHALI", "RANGAMATI", "DHAKA", "FARIDPUR", "GAZIPUR", "GOPALGANJ", "JAMALPUR", 
-                              "KISHOREGANJ", "MADARIPUR", "MANIKGANJ", "MUNSHIGANJ","MAYMENSINGH", "NARAYANGANJ", "NARSINGDI", 
-                              "NETRAKONA", "RAJBARI", "SHARIATPUR", "SHERPUR", "TANGAIL", "BAGERHAT", "CHUDANGA", "JESSORE", 
-                              "JHENAIDAH", "KHULNA", "KUSHTIA", "MAGURA", "MEHERPUR", "NARAIL", "SATKHIRA", "BOGRA", "JOYPURHAT", 
-                              "NAOGAON", "NATORE", "NAWABGANJ", "PABNA", "RAJSHAHI", "SIRAJGANJ", "DINAJPUR", "GAIBANDHA", 
-                              "KURIGRAM", "LALMONIRHAT", "NILPHAMARI","PANCHAGARH", "RANGPUR", "THAKURGAON", "HABIGANJ", 
-                              "MAULAVIBAZAR", "SUNAMGANJ", "SYLHET"};
-                    
-if(1)
-{
-    for ( i = 0; i < 16; i += 1 )   
-    {
-        if(strcmp(district, location_district[i]) == 0)
-        break;
+
+    for (i = 0; i < 64; i += 1) {
+        if (strcmp(district, valid_districts[i]) == 0) {
+            return 1;
+        }
     }
-        printf("\n\nPlz Enter a valid district (Use capital letter) : ");
-        scanf("%s", district);
+    return 0;
 }
-}
+
+
+
