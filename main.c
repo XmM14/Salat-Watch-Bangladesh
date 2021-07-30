@@ -9,6 +9,8 @@ int is_valid_state(char *state, char *valid_states[]);
 char *take_district_from_user();
 int is_valid_district(char *district);
 
+char *strupr(char *s);
+
 int main()
 {
     char *state;
@@ -94,4 +96,16 @@ int is_valid_district(char *district)
         }
     }
     return 0;
+}
+
+char *strupr(char *s)
+{
+    char *pc = s;
+    while (*pc)
+    {
+        *pc = toupper(*pc); /* toupper() requires <ctype.h> */
+        ++pc;
+    }
+
+    return s;
 }
