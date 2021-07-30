@@ -16,11 +16,11 @@ int main()
     char *state;
     char *district;
 
-    printf("\n\t\t\tWelcome to Salat Watch Bangladesh\n\n");
-
     char *valid_states[20] = {
         "DHAKA", "CHATTAGRAM", " BARISAL", "KHULNA", "RAJSHAHI", "RANGPUR", "SYLHET",
         "MYMENSINGH"};
+
+    printf("\n\t\t\tWelcome to Salat Watch Bangladesh\n\n");
 
     do
     {
