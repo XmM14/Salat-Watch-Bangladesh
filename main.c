@@ -7,7 +7,7 @@ char *take_state_from_user();
 int is_valid_state(char *state, char *valid_states[]);
 
 char *take_district_from_user();
-int is_valid_district(char *district);
+int is_valid_district(char *district, char *valid_districts[]);
 
 char *strupr(char *s);
 
@@ -20,6 +20,17 @@ int main()
         "DHAKA", "CHATTAGRAM", " BARISAL", "KHULNA", "RAJSHAHI", "RANGPUR", "SYLHET",
         "MYMENSINGH"};
 
+    char *valid_districts[64] = {
+        "BARGUNA", "BARISAL", "BHOLA", "JHALOKATI", "PATUAKHALI", "PIROJPUR", "BANDARBAN", "BRAHAMANBARIA",
+        "CHANDPUR", "CHITTAGONG", "COMILLA", "COX'S BAZAR", "FENI", "KHAGRACHHARI", "LAKSHMIPUR", "NOAKHALI",
+        "RANGAMATI", "DHAKA", "FARIDPUR", "GAZIPUR", "GOPALGANJ", "JAMALPUR", "KISHOREGANJ", "MADARIPUR",
+        "MANIKGANJ", "MUNSHIGANJ", "MAYMENSINGH", "NARAYANGANJ", "NARSINGDI", "NETRAKONA", "RAJBARI",
+        "SHARIATPUR", "SHERPUR", "TANGAIL", "BAGERHAT", "CHUDANGA", "JESSORE", "JHENAIDAH", "KHULNA",
+        "KUSHTIA", "MAGURA", "MEHERPUR", "NARAIL", "SATKHIRA", "BOGRA", "JOYPURHAT", "NAOGAON",
+        "NATORE", "NAWABGANJ", "PABNA", "RAJSHAHI", "SIRAJGANJ", "DINAJPUR", "GAIBANDHA", "KURIGRAM",
+        "LALMONIRHAT", "NILPHAMARI", "PANCHAGARH", "RANGPUR", "THAKURGAON", "HABIGANJ", "MAULAVIBAZAR",
+        "SUNAMGANJ", "SYLHET"};
+
     printf("\n\t\t\tWelcome to Salat Watch Bangladesh\n\n");
 
     do
@@ -30,7 +41,7 @@ int main()
     do
     {
         district = take_district_from_user();
-    } while (is_valid_district(district) == 0);
+    } while (is_valid_district(district, valid_districts) == 0);
 
     printf("\nYour Location is (%s, %s)", state, district);
     return 0;
@@ -74,18 +85,8 @@ char *take_district_from_user()
     return district;
 }
 
-int is_valid_district(char *district)
+int is_valid_district(char *district, char *valid_districts[])
 {
-    char valid_districts[64][20] = {
-        "BARGUNA", "BARISAL", "BHOLA", "JHALOKATI", "PATUAKHALI", "PIROJPUR", "BANDARBAN", "BRAHAMANBARIA",
-        "CHANDPUR", "CHITTAGONG", "COMILLA", "COX'S BAZAR", "FENI", "KHAGRACHHARI", "LAKSHMIPUR", "NOAKHALI",
-        "RANGAMATI", "DHAKA", "FARIDPUR", "GAZIPUR", "GOPALGANJ", "JAMALPUR", "KISHOREGANJ", "MADARIPUR",
-        "MANIKGANJ", "MUNSHIGANJ", "MAYMENSINGH", "NARAYANGANJ", "NARSINGDI", "NETRAKONA", "RAJBARI",
-        "SHARIATPUR", "SHERPUR", "TANGAIL", "BAGERHAT", "CHUDANGA", "JESSORE", "JHENAIDAH", "KHULNA",
-        "KUSHTIA", "MAGURA", "MEHERPUR", "NARAIL", "SATKHIRA", "BOGRA", "JOYPURHAT", "NAOGAON",
-        "NATORE", "NAWABGANJ", "PABNA", "RAJSHAHI", "SIRAJGANJ", "DINAJPUR", "GAIBANDHA", "KURIGRAM",
-        "LALMONIRHAT", "NILPHAMARI", "PANCHAGARH", "RANGPUR", "THAKURGAON", "HABIGANJ", "MAULAVIBAZAR",
-        "SUNAMGANJ", "SYLHET"};
     int i;
 
     for (i = 0; i < 64; i += 1)
