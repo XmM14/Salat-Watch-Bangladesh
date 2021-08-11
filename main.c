@@ -22,13 +22,13 @@ int main()
 
     int index_of_state;
 
-    char *valid_states[20] = {"DHAKA", "CHATTAGRAM", "BARISAL", "KHULNA",
+    char *valid_states[20] = {"DHAKA", "CHATTOGRAM", "BARISAL", "KHULNA",
                               "RAJSHAHI", "RANGPUR", "SYLHET", "MYMENSINGH"};
 
     char *valid_districts[10][20] = {
         {"DHAKA", "FARIDPUR", "GAZIPUR", "GOPALGANJ", "KISHOREGANJ", "MADARIPUR", "MANIKGANJ",
          "MUNSHIGANJ", "NARAYANGANJ", "NARSINGDI", "RAJBARI", "SHARIATPUR", "TANGAIL"},
-        {"BANDARBAN", "BRAHAMANBARIA", "CHANDPUR", "CHITTAGONG", "COMILLA", "COX'S BAZAR", "FENI",
+        {"BANDARBAN", "BRAHAMANBARIA", "CHANDPUR", "CHATTOGRAM", "COMILLA", "COX'S BAZAR", "FENI",
          "KHAGRACHHARI", "LAKSHMIPUR", "NOAKHALI", "RANGAMATI"},
         {"BARGUNA", "BARISAL", "BHOLA", "JHALOKATI", "PATUAKHALI", "PIROJPUR"},
         {"BAGERHAT", "CHUDANGA", "JESSORE", "JHENAIDAH", "KHULNA", "KUSHTIA", "MAGURA", "MEHERPUR",
