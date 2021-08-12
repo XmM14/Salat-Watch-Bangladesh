@@ -7,3 +7,5 @@ Anyone in Bangladesh interested in Salat will be able to see the time of Salat
 3. Which prayer will be next
 4. It will be seen which prayers have been missed
 5. State as well as district wise schedule
+
+NB: Programmer has all right to change any of features whenever needs!
