@@ -10,11 +10,13 @@ char *take_district_from_user();
 int is_valid_district(char *district, char *valid_districts[], int number_of_districts);
 
 char *take_month_from_user();
-int is_valid_month(char *valid_months[15], char *month, int number_of_months);
+int is_valid_month(char *valid_months[], char *month, int number_of_months);
 
 int take_date_from_user();
 int is_valid_date(int *valid_dates, int date, int number_of_date);
 
+int days_in_month(char *months_with_31_days[], char *months_with_30_days[], int *number_of_months_in_type_of_months,
+                  char *month);
 int index_of(char *valid_states[], char *sate, int number_of_states);
 
 char *strupr(char *s);
@@ -24,7 +26,7 @@ int main()
     int choice = 1;
     int number_of_states = 8;
     int number_of_months = 12;
-    int number_of_dates = 31;
+    int number_of_days;
 
     char *state;
     char *district;
@@ -53,6 +55,12 @@ int main()
     char *valid_months[15] = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST",
                               "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
 
+    char *months_with_31_days[7] = {"JANUARY", "MARCH", "MAY", "JULY", "AUGUST", "OCTOBER", "DECEMBER"};
+
+    char *months_with_30_days[4] = {"APRIL", "JUNE", "SPETEMBER", "NOVEMBER"};
+
+    int number_of_months_in_type_of_months[2] = {7, 4};
+
     int valid_dates[31] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                            21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
 
@@ -62,57 +70,59 @@ int main()
 
     while (choice)
     {
-        printf("\nYour option's for state : ");
-            for (int i = 0; i < number_of_states; i += 1)
-            {
-                printf(" %s ", valid_states[i]);
-            }
-        do
-        {
-            state = take_state_from_user();
-        } while (is_valid_state(state, valid_states, number_of_states) == 0);
+        // printf("\nYour option's for state : ");
+        // for (int i = 0; i < number_of_states; i += 1)
+        // {
+        //     printf(" %s ", valid_states[i]);
+        // }
+        // do
+        // {
+        //     state = take_state_from_user();
+        // } while (is_valid_state(state, valid_states, number_of_states) == 0);
 
-        index_of_state = index_of(valid_states, state, number_of_states);
+        // index_of_state = index_of(valid_states, state, number_of_states);
 
-         printf("\nYour option's for district : ");
-            for (int i = 0; i < number_of_districts_in_state[index_of_state]; i += 1)
-            {
-                printf("%s ", *(valid_districts[index_of_state] + i));
-            }
+        // printf("\nYour option's for district : ");
+        // for (int i = 0; i < number_of_districts_in_state[index_of_state]; i += 1)
+        // {
+        //     printf("%s ", *(valid_districts[index_of_state] + i));
+        // }
 
-        do
-        {
-            district = take_district_from_user();
-        } while (is_valid_district(district, valid_districts[index_of_state], number_of_districts_in_state[index_of_state]) == 0);
+        // do
+        // {
+        //     district = take_district_from_user();
+        // } while (is_valid_district(district, valid_districts[index_of_state], number_of_districts_in_state[index_of_state]) == 0);
 
-        printf("\nYour Location is (%s, %s)", state, district);
+        // printf("\nYour Location is (%s, %s)", state, district);
         //After successfully input location programm will show salat time of present date
         while (choice)
         {
             printf("\n\nEnter month and date you want to serch for \n");
-
             printf("\n\nYour option's for month : ");
 
-                for (int i = 0; i < number_of_months; i += 1)
-                {
-                    printf(" %s ", valid_months[i]);
-                }
+            for (int i = 0; i < number_of_months; i += 1)
+            {
+                printf(" %s ", valid_months[i]);
+            }
 
             do
             {
                 month = take_month_from_user();
             } while (is_valid_month(valid_months, month, number_of_months) == 0);
 
+            number_of_days = days_in_month(months_with_31_days, months_with_30_days,
+                                           number_of_months_in_type_of_months, month);
+
             printf("\n\nYour option's for date : ");
-                for (int i = 0; i < number_of_dates; i += 1)
-                {
-                    printf(" %d ", valid_dates[i]);
-                }
+            for (int i = 0; i < number_of_days; i += 1)
+            {
+                printf(" %d ", valid_dates[i]);
+            }
 
             do
             {
                 date = take_date_from_user();
-            } while (is_valid_date(valid_dates, date, number_of_dates) == 0);
+            } while (is_valid_date(valid_dates, date, number_of_days) == 0);
 
             printf("\n\n\t\t\tSalat time of %s,%d : ", month, date);
 
@@ -228,6 +238,25 @@ int is_valid_date(int *valid_dates, int date, int number_of_date)
     return 0;
 }
 
+int days_in_month(char *months_with_31_days[], char *months_with_30_days[],
+                  int *number_of_months_with_31_and_30_days, char *month)
+{
+    int i, j;
+
+    i = 0;
+    for (j = 0; j < number_of_months_with_31_and_30_days[i]; j += 1)
+    {
+        if (strcmp(months_with_31_days[j], month) == 0)
+            return 31;
+    }
+    i += 1;
+    for (j = 0; j < number_of_months_with_31_and_30_days[i]; j += 1)
+    {
+        if (strcmp(months_with_30_days[j], month) == 0)
+            return 30;
+    }
+    return 28;
+}
 int index_of(char *valid_states[], char *state, int number_of_states)
 {
     for (int i = 0; i < number_of_states; i += 1)
