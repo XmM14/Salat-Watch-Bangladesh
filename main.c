@@ -214,6 +214,26 @@ int is_valid_month(char *valid_months[15], char *month, int number_of_months)
     return 0;
 }
 
+int days_in_month(char *months_with_31_days[], char *months_with_30_days[],
+                  int *number_of_months_with_31_and_30_days, char *month)
+{
+    int i, j;
+
+    i = 0;
+    for (j = 0; j < number_of_months_with_31_and_30_days[i]; j += 1)
+    {
+        if (strcmp(months_with_31_days[j], month) == 0)
+            return 31;
+    }
+    i += 1;
+    for (j = 0; j < number_of_months_with_31_and_30_days[i]; j += 1)
+    {
+        if (strcmp(months_with_30_days[j], month) == 0)
+            return 30;
+    }
+    return 28;
+}
+
 int take_date_from_user()
 {
     int date;
@@ -238,25 +258,6 @@ int is_valid_date(int *valid_dates, int date, int number_of_date)
     return 0;
 }
 
-int days_in_month(char *months_with_31_days[], char *months_with_30_days[],
-                  int *number_of_months_with_31_and_30_days, char *month)
-{
-    int i, j;
-
-    i = 0;
-    for (j = 0; j < number_of_months_with_31_and_30_days[i]; j += 1)
-    {
-        if (strcmp(months_with_31_days[j], month) == 0)
-            return 31;
-    }
-    i += 1;
-    for (j = 0; j < number_of_months_with_31_and_30_days[i]; j += 1)
-    {
-        if (strcmp(months_with_30_days[j], month) == 0)
-            return 30;
-    }
-    return 28;
-}
 int index_of(char *valid_states[], char *state, int number_of_states)
 {
     for (int i = 0; i < number_of_states; i += 1)
