@@ -2,12 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
 
 char *take_state_from_user();
 int is_valid_state(char *state, char *valid_states[], int number_of_state);
 
 char *take_district_from_user();
 int is_valid_district(char *district, char *valid_districts[], int number_of_districts);
+
+void show_current_time();
 
 char *take_month_from_user();
 int is_valid_month(char *valid_months[], char *month, int number_of_months);
@@ -23,6 +26,8 @@ char *strupr(char *s);
 
 int main()
 {
+    system("COLOR 6");
+
     int choice = 1;
     int number_of_states = 8;
     int number_of_months = 12;
@@ -34,7 +39,6 @@ int main()
     int date;
 
     int index_of_state;
-
     char *valid_states[20] = {"DHAKA", "CHATTOGRAM", "BARISAL", "KHULNA",
                               "RAJSHAHI", "RANGPUR", "SYLHET", "MYMENSINGH"};
 
@@ -44,13 +48,13 @@ int main()
         {"BANDARBAN", "BRAHAMANBARIA", "CHANDPUR", "CHATTOGRAM", "COMILLA", "COX'S BAZAR", "FENI",
          "KHAGRACHHARI", "LAKSHMIPUR", "NOAKHALI", "RANGAMATI"},
         {"BARGUNA", "BARISAL", "BHOLA", "JHALOKATI", "PATUAKHALI", "PIROJPUR"},
-        {"BAGERHAT", "CHUDANGA", "JESSORE", "JHENAIDAH", "KHULNA", "KUSHTIA", "MAGURA", "MEHERPUR",
+        {"BAGERHAT", "CHUADANGA", "JESSORE", "JHENAIDAH", "KHULNA", "KUSHTIA", "MAGURA", "MEHERPUR",
          "NARAIL", "SATKHIRA"},
         {"BOGRA", "JOYPURHAT", "NAOGAON", "NATORE", "NAWABGANJ", "PABNA", "RAJSHAHI", "SIRAJGANJ"},
         {"DINAJPUR", "GAIBANDHA", "KURIGRAM", "LALMONIRHAT", "NILPHAMARI", "PANCHAGARH",
          "RANGPUR", "THAKURGAON"},
         {"HABIGANJ", "MAULAVIBAZAR", "SUNAMGANJ", "SYLHET"},
-        {"MAYMENSINGH", "NETRAKONA", "JAMALPUR", "SHERPUR"}};
+        {"MAYMENSINGH", "NETROKONA", "JAMALPUR", "SHERPUR"}};
 
     char *valid_months[15] = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST",
                               "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
@@ -70,34 +74,43 @@ int main()
 
     while (choice)
     {
-        // printf("\nYour option's for state : ");
-        // for (int i = 0; i < number_of_states; i += 1)
-        // {
-        //     printf(" %s ", valid_states[i]);
-        // }
-        // do
-        // {
-        //     state = take_state_from_user();
-        // } while (is_valid_state(state, valid_states, number_of_states) == 0);
+        printf("\nYour option's for state : ");
+        for (int i = 0; i < number_of_states; i += 1)
+        {
+            printf(" %s ", valid_states[i]);
+        }
+        do
+        {
+            state = take_state_from_user();
+        } while (is_valid_state(state, valid_states, number_of_states) == 0);
 
-        // index_of_state = index_of(valid_states, state, number_of_states);
+        index_of_state = index_of(valid_states, state, number_of_states);
 
-        // printf("\nYour option's for district : ");
-        // for (int i = 0; i < number_of_districts_in_state[index_of_state]; i += 1)
-        // {
-        //     printf("%s ", *(valid_districts[index_of_state] + i));
-        // }
+        printf("\nYour option's for district : ");
+        for (int i = 0; i < number_of_districts_in_state[index_of_state]; i += 1)
+        {
+            printf("%s ", *(valid_districts[index_of_state] + i));
+        }
 
-        // do
-        // {
-        //     district = take_district_from_user();
-        // } while (is_valid_district(district, valid_districts[index_of_state], number_of_districts_in_state[index_of_state]) == 0);
+        do
+        {
+            district = take_district_from_user();
+        } while (is_valid_district(district, valid_districts[index_of_state], number_of_districts_in_state[index_of_state]) == 0);
 
-        // printf("\nYour Location is (%s, %s)", state, district);
+        printf("\nYour Location is (%s, %s)", state, district);
+
+        show_current_time();
+
         //After successfully input location programm will show salat time of present date
+
+        printf("\n\nDo You want to see Salat time of Any other day?\n");
+        printf("If Yes(Press 1), If No(Press 0): ");
+        scanf("%d", &choice);
+
         while (choice)
         {
-            printf("\n\nEnter month and date you want to serch for \n");
+
+            printf("\n\n\t\t\t|| Enter month and date you want to serch for || \n");
             printf("\n\nYour option's for month : ");
 
             for (int i = 0; i < number_of_months; i += 1)
@@ -124,19 +137,20 @@ int main()
                 date = take_date_from_user();
             } while (is_valid_date(valid_dates, date, number_of_days) == 0);
 
-            printf("\n\n\t\t\tSalat time of %s,%d : ", month, date);
+            printf("\n\n\t\t\t || Salat time of %s %d  ||", month, date);
 
             //after successfully inputed month and date program will show time of salat of serched date
 
             printf("\n\nDo You want to see Salat time of Any other day?\n");
             printf("If Yes(Press 1), If No(Press 0): ");
             scanf("%d", &choice);
+
         }
 
         printf("\n\nSetup again (Press 1) or exit (press 0)   : ");
         scanf("%d", &choice);
     }
-
+    printf("\n\n\t\t\tThanks For All your Patience!");
     return 0;
 }
 
@@ -188,6 +202,45 @@ int is_valid_district(char *district, char *valid_districts[], int number_of_dis
         }
     }
     return 0;
+}
+
+void show_current_time()
+{
+    // variables to store the date and time components
+    int hours, minutes, seconds, days, months, years;
+
+    // `time_t` is an arithmetic time type
+    time_t now;
+
+    // Obtain current time
+    // `time()` returns the current time of the system as a `time_t` value
+    time(&now);
+
+    // Convert to local time format and print to stdout
+    //printf("Today is %s", ctime(&now));                     ************???????
+
+    // localtime converts a `time_t` value to calendar time and
+    // returns a pointer to a `tm` structure with its members
+    // filled with the corresponding values
+    struct tm *local = localtime(&now);
+
+    hours = local->tm_hour;  // get hours since midnight (0-23)
+    minutes = local->tm_min; // get minutes passed after the hour (0-59)
+    seconds = local->tm_sec; // get seconds passed after a minute (0-59)
+
+    days = local->tm_mday;         // get day of month (1 to 31)
+    months = local->tm_mon + 1;    // get month of year (0 to 11)
+    years = local->tm_year + 1900; // get year since 1900
+
+    // print local time
+    if (hours < 12)
+    { // before midday
+        printf("\n\nToday is : %02d/%02d/%d  %02d:%02d:%02d am\n", days, months, years, hours, minutes, seconds);
+    }
+    else
+    { // after midday
+        printf("\n\nToday is : %02d/%02d/%d  %02d:%02d:%02d pm\n", days, months, years, hours, minutes, seconds);
+    }
 }
 
 char *take_month_from_user()
