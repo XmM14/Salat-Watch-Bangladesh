@@ -53,7 +53,7 @@ int main()
         {"BOGRA", "JOYPURHAT", "NAOGAON", "NATORE", "NAWABGANJ", "PABNA", "RAJSHAHI", "SIRAJGANJ"},
         {"DINAJPUR", "GAIBANDHA", "KURIGRAM", "LALMONIRHAT", "NILPHAMARI", "PANCHAGARH",
          "RANGPUR", "THAKURGAON"},
-        {"HABIGANJ", "MAULAVIBAZAR", "SUNAMGANJ", "SYLHET"},
+        {"HABIGANJ", "MOULVIBAZAR", "SUNAMGANJ", "SYLHET"},
         {"MAYMENSINGH", "NETROKONA", "JAMALPUR", "SHERPUR"}};
 
     char *valid_months[15] = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST",
@@ -70,7 +70,7 @@ int main()
 
     int number_of_districts_in_state[10] = {13, 11, 6, 10, 8, 8, 4, 4};
 
-    printf("\n\t\t\t\tWelcome to Salat Watch Bangladesh\n\n");
+    printf("\n\t\t\t\t|| Welcome to Salat Watch Bangladesh 2021 ||\n\n");
 
     while (choice)
     {
@@ -110,7 +110,7 @@ int main()
         while (choice)
         {
 
-            printf("\n\n\t\t\t|| Enter month and date you want to serch for || \n");
+            printf("\n\n\t\t\t|| Enter month and date of 2021 you want to serch for || \n");
             printf("\n\nYour option's for month : ");
 
             for (int i = 0; i < number_of_months; i += 1)
@@ -206,39 +206,29 @@ int is_valid_district(char *district, char *valid_districts[], int number_of_dis
 
 void show_current_time()
 {
-    // variables to store the date and time components
     int hours, minutes, seconds, days, months, years;
 
-    // `time_t` is an arithmetic time type
     time_t now;
 
-    // Obtain current time
-    // `time()` returns the current time of the system as a `time_t` value
     time(&now);
 
-    // Convert to local time format and print to stdout
-    //printf("Today is %s", ctime(&now));                     ************???????
 
-    // localtime converts a `time_t` value to calendar time and
-    // returns a pointer to a `tm` structure with its members
-    // filled with the corresponding values
     struct tm *local = localtime(&now);
 
-    hours = local->tm_hour;  // get hours since midnight (0-23)
-    minutes = local->tm_min; // get minutes passed after the hour (0-59)
-    seconds = local->tm_sec; // get seconds passed after a minute (0-59)
+    hours = local->tm_hour;  
+    minutes = local->tm_min; 
+    seconds = local->tm_sec; 
 
-    days = local->tm_mday;         // get day of month (1 to 31)
-    months = local->tm_mon + 1;    // get month of year (0 to 11)
-    years = local->tm_year + 1900; // get year since 1900
+    days = local->tm_mday;         
+    months = local->tm_mon + 1;    
+    years = local->tm_year + 1900; 
 
-    // print local time
     if (hours < 12)
-    { // before midday
+    { 
         printf("\n\nToday is : %02d/%02d/%d  %02d:%02d:%02d am\n", days, months, years, hours, minutes, seconds);
     }
     else
-    { // after midday
+    { 
         printf("\n\nToday is : %02d/%02d/%d  %02d:%02d:%02d pm\n", days, months, years, hours, minutes, seconds);
     }
 }
