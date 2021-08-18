@@ -11,7 +11,7 @@ const int number_of_months = 12;
 
 typedef struct prayer_time
 {
-    char date[20], day[10], fajr[10], shuruq[10], dhuha[10], dhuhur[10], asr[10], magribh[10], isha[10], qibla_hour[10];
+    char date[20], day[10], fajr[10], shuruq[10], dhuha[10], dhuhur[10], asr[10], magribh[10], isha[10];
 } prayer_time;
 
 char *take_state_from_user();
@@ -135,9 +135,7 @@ int main()
 
         //show_current_time(); //we can print next and present prayer comparing with current time;
 
-        sprintf(path,"%s.txt", district);
-
-        printf("%s", path);
+        sprintf(path, "prayer_time_by_district\\%s.txt", district);
 
         list_of_prayer_time = get_list_of_prayer_time(path);
         prayer_time_of_searched_day = search_prayer_time(list_of_prayer_time, curr_date);
@@ -180,7 +178,7 @@ int main()
 
             months_no = no_of_months(valid_months, month, number_of_months);
             searched_date = get_searched_date(months_no, date);
-            
+
             list_of_prayer_time = get_list_of_prayer_time(path);
             prayer_time_of_searched_day = search_prayer_time(list_of_prayer_time, searched_date);
 
@@ -294,7 +292,7 @@ prayer_time *get_list_of_prayer_time(char *path)
     while (fgets(line, 1000, prayer_time_file) != NULL)
     {
 
-        sscanf(line, "%s %s %s %s %s %s %s %s %s %s",
+        sscanf(line, "%s %s %s %s %s %s %s %s %s",
                list_of_prayer_time[index].date,
                list_of_prayer_time[index].day,
                list_of_prayer_time[index].fajr,
@@ -303,8 +301,7 @@ prayer_time *get_list_of_prayer_time(char *path)
                list_of_prayer_time[index].dhuhur,
                list_of_prayer_time[index].asr,
                list_of_prayer_time[index].magribh,
-               list_of_prayer_time[index].isha,
-               list_of_prayer_time[index].qibla_hour);
+               list_of_prayer_time[index].isha);
 
         index += 1;
     }
@@ -371,15 +368,6 @@ void display_salat_times(prayer_time prayer_time_of_searched_day)
     printf("\n\tAsr          %s", prayer_time_of_searched_day.asr);
     printf("\n\tMagribh      %s", prayer_time_of_searched_day.magribh);
     printf("\n\tIsha         %s", prayer_time_of_searched_day.isha);
-
-    if (prayer_time_of_searched_day.qibla_hour == NULL)
-    {
-        printf("\n\tQibla Hour        not available");
-    }
-    else
-    {
-        printf("\n\tQibla Hour   %s", prayer_time_of_searched_day.qibla_hour);
-    }
 }
 
 char *take_month_from_user()
