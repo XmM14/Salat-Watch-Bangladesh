@@ -13,12 +13,12 @@ prayer_time *get_list_of_prayer_time(char *path);
 
 char *get_current_date();
 char *get_current_time();
-
 char *get_searched_date(int month, int date);
 
 prayer_time search_prayer_time(prayer_time *list_of_prayer_time, char *a_date);
 
-void display_salat_times(prayer_time prayer_time_of_searched_day);
+void display_salat_times_for_a_date(prayer_time prayer_time_of_a_day);
+void display_current_and_present_salat(prayer_time prayer_time_of_current_day, char *current_time);
 
 char *take_month_from_user();
 int is_valid_month(char *valid_months[], char *month, int number_of_months);

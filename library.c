@@ -62,7 +62,6 @@ int is_valid_district(char *district, char *valid_districts[], int number_of_dis
     return 0;
 }
 
-
 prayer_time *get_list_of_prayer_time(char *path)
 {
     FILE *prayer_time_file;
@@ -139,7 +138,6 @@ char *get_current_time()
     minutes = local->tm_min;
     seconds = local->tm_sec;
 
-
     days = local->tm_mday;
     months = local->tm_mon + 1;
     years = local->tm_year + 1900;
@@ -170,17 +168,54 @@ prayer_time search_prayer_time(prayer_time *list_of_prayer_time, char *a_date)
     }
 }
 
-void display_salat_times(prayer_time prayer_time_of_searched_day)
+void display_salat_times_for_a_date(prayer_time prayer_time_of_a_day)
 {
-    printf("\n\n\tDate        %s", prayer_time_of_searched_day.date);
-    printf("\n\tDay          %s", prayer_time_of_searched_day.day);
-    printf("\n\tFajr         %s", prayer_time_of_searched_day.fajr);
-    printf("\n\tshuruq       %s", prayer_time_of_searched_day.shuruq);
-    printf("\n\tDhuha        %s", prayer_time_of_searched_day.dhuha);
-    printf("\n\tDhuhur       %s", prayer_time_of_searched_day.dhuhur);
-    printf("\n\tAsr          %s", prayer_time_of_searched_day.asr);
-    printf("\n\tMagribh      %s", prayer_time_of_searched_day.magribh);
-    printf("\n\tIsha         %s", prayer_time_of_searched_day.isha);
+    printf("\n\nDate        %s", prayer_time_of_a_day.date);
+    printf("\nDay          %s", prayer_time_of_a_day.day);
+    printf("\nFajr         %s", prayer_time_of_a_day.fajr);
+    printf("\nshuruq       %s", prayer_time_of_a_day.shuruq);
+    printf("\nDhuha        %s", prayer_time_of_a_day.dhuha);
+    printf("\nDhuhur       %s", prayer_time_of_a_day.dhuhur);
+    printf("\nAsr          %s", prayer_time_of_a_day.asr);
+    printf("\nMagribh      %s", prayer_time_of_a_day.magribh);
+    printf("\nIsha         %s", prayer_time_of_a_day.isha);
+}
+
+void display_current_and_present_salat(prayer_time prayer_time_of_current_day, char *current_time)
+{
+    if (strcmp(current_time, prayer_time_of_current_day.fajr) < 0)
+    {
+        if (strcmp(current_time, "00:01") < 0)
+        {
+            printf("\n\nCurrent Prayer is  :  Isha");
+            printf("\nNext Prayer is     :  Fajr");
+        }
+        else
+        {
+            printf("\n\nCurrent Prayer is  :  Mid-night Salat(Tahajjud)");
+            printf("\nNext Prayer is     :  Fajr");
+        }
+    }
+    else if (strcmp(current_time, prayer_time_of_current_day.dhuhur) < 0)
+    {
+        printf("\n\nCurrent Prayer is  :  Fajr");
+        printf("\nNext Prayer is     :  Dhuhur");
+    }
+    else if (strcmp(current_time, prayer_time_of_current_day.asr) < 0)
+    {
+        printf("\n\nCurrent Prayer is  :  Dhuhur");
+        printf("\nNext Prayer is     :  Asr");
+    }
+    else if (strcmp(current_time, prayer_time_of_current_day.magribh) < 0)
+    {
+        printf("\n\nCurrent Prayer is  :  Asr");
+        printf("\nNext Prayer is     :  Magribh");
+    }
+    else if (strcmp(current_time, prayer_time_of_current_day.isha) < 0)
+    {
+        printf("\n\nCurrent Prayer is  :  Magribh");
+        printf("\nNext Prayer is     :  Isha");
+    }
 }
 
 char *take_month_from_user()

@@ -21,13 +21,14 @@ int main()
     char *district;
     char *month;
     int date;
-    char *curr_date;
+    char *current_date;
     char *current_time;
     char *searched_date;
     char full_date[10];
 
     prayer_time *list_of_prayer_time;
     prayer_time prayer_time_of_searched_day;
+    prayer_time prayer_time_of_current_day;
 
     char path[200];
 
@@ -90,21 +91,21 @@ int main()
         } while (is_valid_district(district, valid_districts[index_of_state], number_of_districts_in_state[index_of_state]) == 0);
 
         printf("\nYou set your Location : (%s, %s)", state, district);
-        printf("\nPrayer Times in %s, %s Today - ", state, district);
+        printf("\n\nPrayer Times in %s, %s, Today - ", state, district);
 
-
-        curr_date = get_current_date();
+        current_date = get_current_date();
         current_time = get_current_time();
 
-        printf("%s", curr_date);
-        printf("\n%s", current_time);
-
+        printf("%s", current_date);
         sprintf(path, "prayer_time_by_district\\%s.txt", district);
 
         list_of_prayer_time = get_list_of_prayer_time(path);
-        prayer_time_of_searched_day = search_prayer_time(list_of_prayer_time, curr_date);
+        prayer_time_of_current_day = search_prayer_time(list_of_prayer_time, current_date);
 
-        display_salat_times(prayer_time_of_searched_day);
+        display_salat_times_for_a_date(prayer_time_of_current_day);  // For current day
+
+        printf("\n\nThe time is Now  %s", current_time);
+        display_current_and_present_salat(prayer_time_of_current_day, current_time); 
 
         printf("\n\nDo You want to see Salat time of Any other day?\n");
         printf("If Yes(Press 1), If No(Press 0): ");
@@ -147,7 +148,7 @@ int main()
             prayer_time_of_searched_day = search_prayer_time(list_of_prayer_time, searched_date);
 
             printf("\n\n\nSalat time of %s, %d, 2021", month, date);
-            display_salat_times(prayer_time_of_searched_day);
+            display_salat_times_for_a_date(prayer_time_of_searched_day); // For searched day
 
             printf("\n\nDo You want to see Salat time of Any other day?\n");
             printf("If Yes(Press 1), If No(Press 0): ");
