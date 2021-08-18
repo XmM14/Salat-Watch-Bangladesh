@@ -67,7 +67,7 @@ int main()
     prayer_time *list_of_prayer_time;
     prayer_time prayer_time_of_searched_day;
 
-    char path[200] = "D:\\XmM\\Salat-Watch-Bangladesh\\";
+    char path[200];
 
     char *valid_states[20] = {"DHAKA", "CHATTOGRAM", "BARISAL", "KHULNA",
                               "RAJSHAHI", "RANGPUR", "SYLHET", "MYMENSINGH"};
@@ -135,8 +135,9 @@ int main()
 
         //show_current_time(); //we can print next and present prayer comparing with current time;
 
-        strcat(path, district);
-        strcat(path, ".txt");
+        sprintf(path,"%s.txt", district);
+
+        printf("%s", path);
 
         list_of_prayer_time = get_list_of_prayer_time(path);
         prayer_time_of_searched_day = search_prayer_time(list_of_prayer_time, curr_date);
