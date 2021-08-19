@@ -68,16 +68,21 @@ prayer_time *get_list_of_prayer_time(char *path)
 
     prayer_time_file = fopen(path, "r");
 
+    if (prayer_time_file == NULL)
+    {
+        printf("Error! Plz make sure you've downloded additional file exactly or didn't change any name!");
+        exit(-1);
+    }
+    
     char line[200];
 
     prayer_time *list_of_prayer_time;
-    list_of_prayer_time = (prayer_time *)malloc(sizeof(prayer_time) * 400);
+    list_of_prayer_time = (prayer_time *)malloc(sizeof(prayer_time) * DAYS_IN_2021);
 
     int index = 0;
 
     while (fgets(line, 1000, prayer_time_file) != NULL)
     {
-
         sscanf(line, "%s %s %s %s %s %s %s %s %s",
                list_of_prayer_time[index].date,
                list_of_prayer_time[index].day,
@@ -98,8 +103,8 @@ prayer_time *get_list_of_prayer_time(char *path)
 
 char *get_current_date()
 {
-    char *current_day;
-    current_day = (char *)malloc(sizeof(char) * 50);
+    char *current_date;
+    current_date = (char *)malloc(sizeof(char) * 50);
 
     int hours, minutes, seconds, days, months, years;
 
@@ -109,16 +114,12 @@ char *get_current_date()
 
     struct tm *local = localtime(&now);
 
-    hours = local->tm_hour;
-    minutes = local->tm_min;
-    seconds = local->tm_sec;
-
     days = local->tm_mday;
     months = local->tm_mon + 1;
     years = local->tm_year + 1900;
 
-    sprintf(current_day, "%02d/%02d/%d", days, months, years);
-    return current_day;
+    sprintf(current_date, "%02d/%02d/%d", days, months, years);
+    return current_date;
 }
 
 char *get_current_time()
@@ -137,10 +138,6 @@ char *get_current_time()
     hours = local->tm_hour;
     minutes = local->tm_min;
     seconds = local->tm_sec;
-
-    days = local->tm_mday;
-    months = local->tm_mon + 1;
-    years = local->tm_year + 1900;
 
     sprintf(current_time, "%02d:%02d", hours, minutes);
     return current_time;
@@ -217,6 +214,7 @@ void display_current_and_present_salat(prayer_time prayer_time_of_current_day, c
         printf("\nNext Prayer is     :  Isha");
     }
 }
+
 
 char *take_month_from_user()
 {

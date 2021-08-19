@@ -23,6 +23,7 @@ int main()
     int date;
     char *current_date;
     char *current_time;
+    char qaza_salat[100];
     char *searched_date;
     char full_date[10];
 
@@ -103,9 +104,38 @@ int main()
         prayer_time_of_current_day = search_prayer_time(list_of_prayer_time, current_date);
 
         printf("\nThe time is Now  %s", current_time);
-        display_salat_times_for_a_date(prayer_time_of_current_day);  // For current day
-        display_current_and_present_salat(prayer_time_of_current_day, current_time); 
+        display_salat_times_for_a_date(prayer_time_of_current_day); // For current day
+        display_current_and_present_salat(prayer_time_of_current_day, current_time);
         printf("\nNB: All times are in 24 hour format !");
+
+        printf("\n\nDid you missed any salat today?");
+        printf("If Yes(Press 1), If No(Press 0)");
+        scanf("%d", &choice);
+
+        if (choice == 1)
+        {
+            FILE *missed_salat_file = fopen("missed_salat.txt", "a");
+            printf("\nWrite Down here : ");
+            fflush(stdin);
+            gets(qaza_salat);
+            fprintf(missed_salat_file, "%s : (%s)\n", current_date, qaza_salat);
+            fclose(missed_salat_file);           
+        }
+
+        printf("\n\nDo You want to Qaza salat of Any other day?\n");
+        printf("If Yes(Press 1), If No(Press 0): ");
+        scanf("%d", &choice);
+
+        if(choice == 1)
+        {
+            FILE *missed_salat_file = fopen("missed_salat.txt", "r");
+             while (fgets(qaza_salat, 1000, missed_salat_file) != NULL)
+            {
+                printf("%s", qaza_salat);
+            }
+
+            fclose(missed_salat_file);
+        }
 
         printf("\n\nDo You want to see Salat time of Any other day?\n");
         printf("If Yes(Press 1), If No(Press 0): ");
@@ -162,4 +192,3 @@ int main()
 
     return 0;
 }
-
