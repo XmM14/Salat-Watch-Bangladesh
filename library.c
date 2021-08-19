@@ -170,8 +170,8 @@ prayer_time search_prayer_time(prayer_time *list_of_prayer_time, char *a_date)
 
 void display_salat_times_for_a_date(prayer_time prayer_time_of_a_day)
 {
-    printf("\n\nDate        %s", prayer_time_of_a_day.date);
-    printf("\nDay          %s", prayer_time_of_a_day.day);
+    printf("\n\nDate       %s", prayer_time_of_a_day.date);
+    printf("\nDay         %s", prayer_time_of_a_day.day);
     printf("\nFajr         %s", prayer_time_of_a_day.fajr);
     printf("\nshuruq       %s", prayer_time_of_a_day.shuruq);
     printf("\nDhuha        %s", prayer_time_of_a_day.dhuha);

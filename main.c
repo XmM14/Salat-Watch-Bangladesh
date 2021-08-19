@@ -10,7 +10,7 @@ const int number_of_months = 12;
 
 int main()
 {
-    system("COLOR 6");
+    system("COLOR c");
 
     int choice = 1;
     int number_of_days;
@@ -102,10 +102,10 @@ int main()
         list_of_prayer_time = get_list_of_prayer_time(path);
         prayer_time_of_current_day = search_prayer_time(list_of_prayer_time, current_date);
 
+        printf("\nThe time is Now  %s", current_time);
         display_salat_times_for_a_date(prayer_time_of_current_day);  // For current day
-
-        printf("\n\nThe time is Now  %s", current_time);
         display_current_and_present_salat(prayer_time_of_current_day, current_time); 
+        printf("\nNB: All times are in 24 hour format !");
 
         printf("\n\nDo You want to see Salat time of Any other day?\n");
         printf("If Yes(Press 1), If No(Press 0): ");
