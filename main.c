@@ -10,9 +10,10 @@ const int number_of_months = 12;
 
 int main()
 {
-    system("COLOR c");
+    system("COLOR C");
 
     int choice = 1;
+    int option;
     int number_of_days;
     int months_no;
     int index_of_state;
@@ -23,7 +24,7 @@ int main()
     int date;
     char *current_date;
     char *current_time;
-    char qaza_salat[100];
+    char *qaza_salat;
     char *searched_date;
     char full_date[10];
 
@@ -68,6 +69,7 @@ int main()
 
     while (choice)
     {
+        printf("Set Your location first - \n");
         printf("\nYour option's for state : ");
         for (int i = 0; i < number_of_states; i += 1)
         {
@@ -108,34 +110,21 @@ int main()
         display_current_and_present_salat(prayer_time_of_current_day, current_time);
         printf("\nNB: All times are in 24 hour format !");
 
-        printf("\n\nDid you missed any salat today?");
-        printf("If Yes(Press 1), If No(Press 0)");
-        scanf("%d", &choice);
-
-        if (choice == 1)
-        {
-            FILE *missed_salat_file = fopen("missed_salat.txt", "a");
-            printf("\nWrite Down here : ");
-            fflush(stdin);
-            gets(qaza_salat);
-            fprintf(missed_salat_file, "%s : (%s)\n", current_date, qaza_salat);
-            fclose(missed_salat_file);           
-        }
-
-        printf("\n\nDo You want to Qaza salat of Any other day?\n");
+        printf("\n\nDid you missed any salat today?\n");
         printf("If Yes(Press 1), If No(Press 0): ");
         scanf("%d", &choice);
 
-        if(choice == 1)
+        while (choice)
         {
-            FILE *missed_salat_file = fopen("missed_salat.txt", "r");
-             while (fgets(qaza_salat, 1000, missed_salat_file) != NULL)
-            {
-                printf("%s", qaza_salat);
-            }
-
-            fclose(missed_salat_file);
+            printf("\nWrite down here  : ");
+            qaza_salat = take_qaza_salat_from_user(current_date);
+            printf("\n\nDo you want to write more?\n");
+            printf("If Yes(Press 1), If No(Press 0): ");
+            scanf("%d", &choice);
         }
+
+        printf("\n\n--Your qaza salat still now--\n");
+        display_qaza_salat(qaza_salat);
 
         printf("\n\nDo You want to see Salat time of Any other day?\n");
         printf("If Yes(Press 1), If No(Press 0): ");
@@ -144,7 +133,7 @@ int main()
         while (choice)
         {
 
-            printf("\n\n\t\t\t|| Enter month and date of 2021 you want to serch for || \n");
+            printf("\n\n|| Enter month and date of 2021 you want to serch for || \n");
             printf("\n\nYour option's for month : ");
 
             for (int i = 0; i < number_of_months; i += 1)
@@ -188,7 +177,7 @@ int main()
         printf("\n\nSetup again (Press 1) or exit (press 0)   : ");
         scanf("%d", &choice);
     }
-    printf("\n\n\t\t\tThanks For All your Patience!");
+    printf("\n\nThanks For All your Patience!");
 
     return 0;
 }

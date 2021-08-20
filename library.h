@@ -20,7 +20,8 @@ prayer_time search_prayer_time(prayer_time *list_of_prayer_time, char *a_date);
 void display_salat_times_for_a_date(prayer_time prayer_time_of_a_day);
 void display_current_and_present_salat(prayer_time prayer_time_of_current_day, char *current_time);
 
-void get_missed_salat(char *missed_salat[]);
+char *take_qaza_salat_from_user(char *current_date);
+void display_qaza_salat(char *qaza_salat);
 
 char *take_month_from_user();
 int is_valid_month(char *valid_months[], char *month, int number_of_months);

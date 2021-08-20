@@ -73,7 +73,7 @@ prayer_time *get_list_of_prayer_time(char *path)
         printf("Error! Plz make sure you've downloded additional file exactly or didn't change any name!");
         exit(-1);
     }
-    
+
     char line[200];
 
     prayer_time *list_of_prayer_time;
@@ -168,7 +168,7 @@ prayer_time search_prayer_time(prayer_time *list_of_prayer_time, char *a_date)
 void display_salat_times_for_a_date(prayer_time prayer_time_of_a_day)
 {
     printf("\n\nDate       %s", prayer_time_of_a_day.date);
-    printf("\nDay         %s", prayer_time_of_a_day.day);
+    printf("\nDay          %s", prayer_time_of_a_day.day);
     printf("\nFajr         %s", prayer_time_of_a_day.fajr);
     printf("\nshuruq       %s", prayer_time_of_a_day.shuruq);
     printf("\nDhuha        %s", prayer_time_of_a_day.dhuha);
@@ -200,8 +200,16 @@ void display_current_and_present_salat(prayer_time prayer_time_of_current_day, c
     }
     else if (strcmp(current_time, prayer_time_of_current_day.asr) < 0)
     {
-        printf("\n\nCurrent Prayer is  :  Dhuhur");
-        printf("\nNext Prayer is     :  Asr");
+        if (strcmp(prayer_time_of_current_day.day, "Friday") == 0)
+        {
+            printf("\n\nCurrent Prayer is  :  Jummah Salat");
+            printf("\nNext Prayer is     :  Asr");
+        }
+        else
+        {
+            printf("\n\nCurrent Prayer is  :  Dhuhur");
+            printf("\nNext Prayer is     :  Asr");
+        }
     }
     else if (strcmp(current_time, prayer_time_of_current_day.magribh) < 0)
     {
@@ -215,6 +223,27 @@ void display_current_and_present_salat(prayer_time prayer_time_of_current_day, c
     }
 }
 
+char *take_qaza_salat_from_user(char *current_date)
+{
+    char *qaza_salat;
+    FILE *missed_salat_file = fopen("missed_salat.txt", "a");
+    fflush(stdin);
+    gets(qaza_salat);
+    fprintf(missed_salat_file, "%s : (%s)\n", current_date, qaza_salat);
+    fclose(missed_salat_file);
+    return qaza_salat;
+}
+
+void display_qaza_salat(char *qaza_salat)
+{
+    FILE *missed_salat_file = fopen("missed_salat.txt", "r");
+    while (fgets(qaza_salat, 1000, missed_salat_file) != NULL)
+    {
+        printf("%s", qaza_salat);
+    }
+
+    fclose(missed_salat_file);
+}
 
 char *take_month_from_user()
 {
