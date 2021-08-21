@@ -223,19 +223,19 @@ void display_current_and_present_salat(prayer_time prayer_time_of_current_day, c
     }
 }
 
-char *take_qaza_salat_from_user(char *current_date)
+void take_qaza_salat_from_user(char *current_date, char*current_time)
 {
     char *qaza_salat;
     FILE *missed_salat_file = fopen("missed_salat.txt", "a");
     fflush(stdin);
     gets(qaza_salat);
-    fprintf(missed_salat_file, "%s : (%s)\n", current_date, qaza_salat);
+    fprintf(missed_salat_file, "%s(%s): (%s)\n", current_date, current_time, qaza_salat);
     fclose(missed_salat_file);
-    return qaza_salat;
 }
 
-void display_qaza_salat(char *qaza_salat)
+void display_qaza_salat()
 {
+    char *qaza_salat;
     FILE *missed_salat_file = fopen("missed_salat.txt", "r");
     while (fgets(qaza_salat, 1000, missed_salat_file) != NULL)
     {

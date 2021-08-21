@@ -10,7 +10,8 @@ const int number_of_months = 12;
 
 int main()
 {
-    system("COLOR C");
+
+    system("COLOR B");
 
     int choice = 1;
     int option;
@@ -65,11 +66,13 @@ int main()
 
     int number_of_districts_in_state[10] = {13, 11, 6, 10, 8, 8, 4, 4};
 
-    printf("\n\t\t\t|| Welcome to Salat Watch Bangladesh 2021 ||\n\n");
+    printf("\n\t\t\t||========================================||");
+    printf("\n\t\t\t|| Welcome to Salat Watch Bangladesh 2021 ||");
+    printf("\n\t\t\t||========================================||");
 
     while (choice)
     {
-        printf("Set Your location first - \n");
+        printf("\n\nSet Your location first - \n");
         printf("\nYour option's for state : ");
         for (int i = 0; i < number_of_states; i += 1)
         {
@@ -117,14 +120,14 @@ int main()
         while (choice)
         {
             printf("\nWrite down here  : ");
-            qaza_salat = take_qaza_salat_from_user(current_date);
+            take_qaza_salat_from_user(current_date, current_time);
             printf("\n\nDo you want to write more?\n");
             printf("If Yes(Press 1), If No(Press 0): ");
             scanf("%d", &choice);
         }
 
         printf("\n\n--Your qaza salat still now--\n");
-        display_qaza_salat(qaza_salat);
+        display_qaza_salat();
 
         printf("\n\nDo You want to see Salat time of Any other day?\n");
         printf("If Yes(Press 1), If No(Press 0): ");
